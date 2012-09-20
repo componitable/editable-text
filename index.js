@@ -23,4 +23,4 @@ function edit(element) {
     });
 }
 
-makeEditable(document.getElementsByClassName('editable-text'));
+makeEditable(document.querySelectorAll('[data-editable="text"]'));
