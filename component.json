@@ -4,7 +4,9 @@
   "description": "Inline editable text fields",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "componitable/editable": "*"
+  },
   "development": {},
   "scripts": [
     "index.js"
