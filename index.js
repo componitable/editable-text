@@ -17,9 +17,14 @@ function edit(element) {
     edit.value = value;
     element.appendChild(edit);
     edit.focus();
+    editable.emit('begin-edit', element);
     editable.blur(edit, function () {
         element.innerHTML = edit.value;
         element.setAttribute('data-in-edit-mode', 'false');
+        if (value != edit.value) {
+            editable.emit('update', element, edit.value);
+        }
+        editable.emit('end-edit', element);
     });
 }
 
