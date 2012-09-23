@@ -25,7 +25,7 @@ function edit(element, options) {
     edit.value = value;
     element.appendChild(edit);
     if (options.maintainSize === true) {
-        dimensions = editable.transformDimensions(edit);
+        dimensions = editable.transformDimensions(edit, dimensions);
         edit.style.width = dimensions.width + 'px';
         edit.style.height = dimensions.height + 'px';
     }
