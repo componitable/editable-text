@@ -2,16 +2,21 @@ var emitter = require('emitter');
 var editable = require('editable');
 
 module.exports = makeEditable;
-function makeEditable(elements) {
+function makeEditable(elements, options) {
+    options = options || {};
     editable.click(elements, function (element) {
         if (element.getAttribute('data-in-edit-mode') == 'true') return;
         element.setAttribute('data-in-edit-mode', 'true');
-        edit(element);
+        edit(element, options);
     });
 }
 emitter(makeEditable);
 
-function edit(element) {
+function edit(element, options) {
+    var dimensions;
+    if (options.maintainSize === true) {
+        dimensions = editable.dimensions(element);
+    }
     emit('pre-begin-edit', element);
     var value = element.textContent;
     element.innerHTML = '';
@@ -19,6 +24,11 @@ function edit(element) {
     edit.type = "text";
     edit.value = value;
     element.appendChild(edit);
+    if (options.maintainSize === true) {
+        dimensions = editable.transformDimensions(edit);
+        edit.style.width = dimensions.width + 'px';
+        edit.style.height = dimensions.height + 'px';
+    }
     edit.focus();
     editable.blur(edit, function () {
         emit('pre-end-edit', element);
