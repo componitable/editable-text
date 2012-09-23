@@ -27,5 +27,3 @@ function edit(element) {
         editable.emit('end-edit', element);
     });
 }
-
-makeEditable(document.querySelectorAll('[data-editable="text"]'));
