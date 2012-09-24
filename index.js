@@ -32,9 +32,9 @@ function edit(element, options) {
     edit.focus();
     editable.blur(edit, function () {
         if (element.getAttribute('data-in-edit-mode') != 'true') return;
+        element.setAttribute('data-in-edit-mode', 'false');
         emit('pre-end-edit', element);
         element.innerHTML = edit.value;
-        element.setAttribute('data-in-edit-mode', 'false');
         if (value != edit.value) {
             emit('update', element, edit.value);
         }
