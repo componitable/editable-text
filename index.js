@@ -19,7 +19,7 @@ function edit(element, options) {
         dimensions = editable.dimensions(element);
     }
     emit('pre-begin-edit', element);
-    var value = element.textContent;
+    var value = element.textContent.trim();
     element.innerHTML = '';
     var edit = document.createElement('input');
     edit.type = "text";
@@ -38,11 +38,11 @@ function edit(element, options) {
         if (element.getAttribute('data-in-edit-mode') != 'true') return;
         element.setAttribute('data-in-edit-mode', 'false');
         emit('pre-end-edit', element);
-        element.innerHTML = edit.value;
+        element.innerHTML = edit.value.trim();
         element.style.width = oldStyle.width;
         element.style.height = oldStyle.height;
-        if (value != edit.value) {
-            emit('update', element, edit.value);
+        if (value != edit.value.trim()) {
+            emit('update', element, edit.value.trim());
         }
         emit('post-end-edit', element);
     });
