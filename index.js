@@ -39,7 +39,7 @@ function edit(element, options) {
         element.setAttribute('data-in-edit-mode', 'false');
         emit('pre-end-edit', element);
         element.innerHTML = edit.value.trim();
-        if (maintainSize === true) {
+        if (options.maintainSize === true) {
             element.style.width = oldStyle.width;
             element.style.height = oldStyle.height;
         }
